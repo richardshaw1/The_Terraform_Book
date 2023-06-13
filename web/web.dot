@@ -1,0 +1,69 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_elb.web (expand)" [label = "aws_elb.web", shape = "box"]
+		"[root] aws_instance.web (expand)" [label = "aws_instance.web", shape = "box"]
+		"[root] aws_security_group.web_host_sg (expand)" [label = "aws_security_group.web_host_sg", shape = "box"]
+		"[root] aws_security_group.web_inbound_sg (expand)" [label = "aws_security_group.web_inbound_sg", shape = "box"]
+		"[root] module.vpc_basic.aws_internet_gateway.tfb (expand)" [label = "module.vpc_basic.aws_internet_gateway.tfb", shape = "box"]
+		"[root] module.vpc_basic.aws_route.internet_access (expand)" [label = "module.vpc_basic.aws_route.internet_access", shape = "box"]
+		"[root] module.vpc_basic.aws_subnet.public (expand)" [label = "module.vpc_basic.aws_subnet.public", shape = "box"]
+		"[root] module.vpc_basic.aws_vpc.tfb (expand)" [label = "module.vpc_basic.aws_vpc.tfb", shape = "box"]
+		"[root] output.addresses" [label = "output.addresses", shape = "note"]
+		"[root] output.elb_address" [label = "output.elb_address", shape = "note"]
+		"[root] output.public_subnet_id" [label = "output.public_subnet_id", shape = "note"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.ami" [label = "var.ami", shape = "note"]
+		"[root] var.instance_ips" [label = "var.instance_ips", shape = "note"]
+		"[root] var.instance_type" [label = "var.instance_type", shape = "note"]
+		"[root] var.key_name" [label = "var.key_name", shape = "note"]
+		"[root] var.region" [label = "var.region", shape = "note"]
+		"[root] aws_elb.web (expand)" -> "[root] aws_instance.web (expand)"
+		"[root] aws_elb.web (expand)" -> "[root] aws_security_group.web_inbound_sg (expand)"
+		"[root] aws_instance.web (expand)" -> "[root] aws_security_group.web_host_sg (expand)"
+		"[root] aws_instance.web (expand)" -> "[root] module.vpc_basic.output.public_subnet_id (expand)"
+		"[root] aws_instance.web (expand)" -> "[root] var.ami"
+		"[root] aws_instance.web (expand)" -> "[root] var.instance_ips"
+		"[root] aws_instance.web (expand)" -> "[root] var.instance_type"
+		"[root] aws_instance.web (expand)" -> "[root] var.key_name"
+		"[root] aws_security_group.web_host_sg (expand)" -> "[root] module.vpc_basic.output.cidr (expand)"
+		"[root] aws_security_group.web_host_sg (expand)" -> "[root] module.vpc_basic.output.vpc_id (expand)"
+		"[root] aws_security_group.web_inbound_sg (expand)" -> "[root] module.vpc_basic.output.vpc_id (expand)"
+		"[root] module.vpc_basic (close)" -> "[root] module.vpc_basic.aws_route.internet_access (expand)"
+		"[root] module.vpc_basic (close)" -> "[root] module.vpc_basic.output.cidr (expand)"
+		"[root] module.vpc_basic (close)" -> "[root] module.vpc_basic.output.public_subnet_id (expand)"
+		"[root] module.vpc_basic (close)" -> "[root] module.vpc_basic.output.vpc_id (expand)"
+		"[root] module.vpc_basic.aws_internet_gateway.tfb (expand)" -> "[root] module.vpc_basic.aws_vpc.tfb (expand)"
+		"[root] module.vpc_basic.aws_route.internet_access (expand)" -> "[root] module.vpc_basic.aws_internet_gateway.tfb (expand)"
+		"[root] module.vpc_basic.aws_subnet.public (expand)" -> "[root] module.vpc_basic.aws_vpc.tfb (expand)"
+		"[root] module.vpc_basic.aws_subnet.public (expand)" -> "[root] module.vpc_basic.var.map_public_ip_on_launch (expand)"
+		"[root] module.vpc_basic.aws_subnet.public (expand)" -> "[root] module.vpc_basic.var.public_subnet (expand)"
+		"[root] module.vpc_basic.aws_vpc.tfb (expand)" -> "[root] module.vpc_basic.var.cidr (expand)"
+		"[root] module.vpc_basic.aws_vpc.tfb (expand)" -> "[root] module.vpc_basic.var.enable_dns_hostnames (expand)"
+		"[root] module.vpc_basic.aws_vpc.tfb (expand)" -> "[root] module.vpc_basic.var.enable_dns_support (expand)"
+		"[root] module.vpc_basic.aws_vpc.tfb (expand)" -> "[root] module.vpc_basic.var.name (expand)"
+		"[root] module.vpc_basic.aws_vpc.tfb (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] module.vpc_basic.output.cidr (expand)" -> "[root] module.vpc_basic.aws_vpc.tfb (expand)"
+		"[root] module.vpc_basic.output.public_subnet_id (expand)" -> "[root] module.vpc_basic.aws_subnet.public (expand)"
+		"[root] module.vpc_basic.output.vpc_id (expand)" -> "[root] module.vpc_basic.aws_vpc.tfb (expand)"
+		"[root] module.vpc_basic.var.cidr (expand)" -> "[root] module.vpc_basic (expand)"
+		"[root] module.vpc_basic.var.enable_dns_hostnames (expand)" -> "[root] module.vpc_basic (expand)"
+		"[root] module.vpc_basic.var.enable_dns_support (expand)" -> "[root] module.vpc_basic (expand)"
+		"[root] module.vpc_basic.var.map_public_ip_on_launch (expand)" -> "[root] module.vpc_basic (expand)"
+		"[root] module.vpc_basic.var.name (expand)" -> "[root] module.vpc_basic (expand)"
+		"[root] module.vpc_basic.var.public_subnet (expand)" -> "[root] module.vpc_basic (expand)"
+		"[root] output.addresses" -> "[root] aws_instance.web (expand)"
+		"[root] output.elb_address" -> "[root] aws_elb.web (expand)"
+		"[root] output.public_subnet_id" -> "[root] module.vpc_basic.output.public_subnet_id (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_elb.web (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.vpc_basic.aws_route.internet_access (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.region"
+		"[root] root" -> "[root] module.vpc_basic (close)"
+		"[root] root" -> "[root] output.addresses"
+		"[root] root" -> "[root] output.elb_address"
+		"[root] root" -> "[root] output.public_subnet_id"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
